@@ -2,20 +2,116 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Theme Color Variables */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #1f1d36;
+  --secondary-background: #2d2a4a;
+  --white: #ffffff;
+  --primary-purple: #9c4a8b;
+  --secondary-purple: #e9a6a6;
+  --red: #ec2626;
+  --green: #00aa44;
+  --blue: #088dd8;
+
+  /* Font Size Variables */
+  --xs-small: 8px;
+  --x-small: 9px;
+  --small: 10px;
+  --medium: 13px;
+  --large: 18px;
+  --x-large: 24px;
+  --xx-large: 30px;
 }
 
+/* Dark Mode */
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
-    --foreground: #ededed;
+    --secondary-background: #171717;
+    --white: #ededed;
+    --primary-purple: #7a3773;
+    --secondary-purple: #c48484;
+    --red: #d11b1b;
+    --green: #008833;
+    --blue: #0668b8;
   }
 }
 
+/* Apply Global Styles */
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: Roboto, sans-serif;
+}
+
+/* Utility Classes */
+.text-primary {
+  color: var(--primary-purple);
+}
+
+.text-secondary {
+  color: var(--secondary-purple);
+}
+
+.text-red {
+  color: var(--red);
+}
+
+.text-green {
+  color: var(--green);
+}
+
+.text-blue {
+  color: var(--blue);
+}
+
+.bg-background {
+  background-color: var(--background);
+}
+
+.bg-primary {
+  background-color: var(--primary-purple);
+}
+
+.bg-secondary {
+  background-color: var(--secondary-purple);
+}
+
+.bg-red {
+  background-color: var(--red);
+}
+
+.bg-green {
+  background-color: var(--green);
+}
+
+.bg-blue {
+  background-color: var(--blue);
+}
+
+/* Font Size Utilities */
+.text-xs-small {
+  font-size: var(--xs-small);
+}
+
+.text-x-small {
+  font-size: var(--x-small);
+}
+
+.text-small {
+  font-size: var(--small);
+}
+
+.text-medium {
+  font-size: var(--medium);
+}
+
+.text-large {
+  font-size: var(--large);
+}
+
+.text-x-large {
+  font-size: var(--x-large);
+}
+
+.text-xx-large {
+  font-size: var(--xx-large);
 }
