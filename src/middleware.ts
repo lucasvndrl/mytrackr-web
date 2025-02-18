@@ -1,45 +1,56 @@
 import { MiddlewareConfig, NextRequest, NextResponse } from "next/server";
-
+import { auth0 } from "./lib/auth0";
 // TODO: IMPLEMENTAR AUTH0 E CHECAGEM DE TOKEN JWT
-
 const publicRoutes = [{ path: "/sign-in", whenAuthenticated: "redirect" }];
 
 const REDIRECT_WHEN_NOT_AUTHENTICATED_ROUTE = "/sign-in";
 
-export function middleware(request: NextRequest) {
-  const path = request.nextUrl.pathname;
-  const publicRoute = publicRoutes.find((route) => route.path === path);
-  const authToken = request.cookies.get("authToken");
+export async function middleware(request: NextRequest, response: NextResponse) {
+  return await auth0.middleware(request);
+  // const path = request.nextUrl.pathname;
+  // const publicRoute = publicRoutes.find((route) => route.path === path);
 
-  if (!authToken && publicRoute) {
-    return NextResponse.next();
-  }
+  // const userAuth0 = await auth0.getSession();
 
-  if (!authToken && !publicRoute) {
-    const redirectUrl = request.nextUrl.clone();
+  // const authToken = userAuth0?.user.sub;
 
-    redirectUrl.pathname = REDIRECT_WHEN_NOT_AUTHENTICATED_ROUTE;
+  // if (!authToken && publicRoute) {
+  //   return NextResponse.next();
+  // }
 
-    return NextResponse.redirect(redirectUrl);
-  }
+  // if (!authToken && !publicRoute) {
+  //   const redirectUrl = request.nextUrl.clone();
 
-  if (
-    authToken &&
-    publicRoute &&
-    publicRoute.whenAuthenticated === "redirect"
-  ) {
-    const redirectUrl = request.nextUrl.clone();
+  //   redirectUrl.pathname = REDIRECT_WHEN_NOT_AUTHENTICATED_ROUTE;
 
-    redirectUrl.pathname = "/";
+  //   return NextResponse.redirect(redirectUrl);
+  // }
 
-    return NextResponse.redirect(redirectUrl);
-  }
+  // if (
+  //   authToken &&
+  //   publicRoute &&
+  //   publicRoute.whenAuthenticated === "redirect"
+  // ) {
+  //   const redirectUrl = request.nextUrl.clone();
 
-  if (authToken && !publicRoute) {
-    // checar se o JWT não está expirado
-  }
+  //   redirectUrl.pathname = "/";
 
-  return NextResponse.next();
+  //   return NextResponse.redirect(redirectUrl);
+  // }
+
+  // if (authToken && !publicRoute) {
+  //   const session = await auth0.getSession();
+  //   if (session?.tokenSet.expiresAt && session?.tokenSet.expiresAt <= 0) {
+  //     await auth0.updateSession(request, response, session);
+  //     const redirectUrl = request.nextUrl.clone();
+
+  //     redirectUrl.pathname = "/";
+
+  //     return NextResponse.redirect(redirectUrl);
+  //   }
+  // }
+
+  // return NextResponse.next();
 }
 
 export const config: MiddlewareConfig = {

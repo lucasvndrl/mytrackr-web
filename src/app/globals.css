@@ -7,11 +7,12 @@
   --background: #1f1d36;
   --secondary-background: #2d2a4a;
   --white: #ffffff;
-  --primary-purple: #9c4a8b;
-  --secondary-purple: #e9a6a6;
+  --primary-purple: #2d0024;
+  --secondary-purple: #9a3ae3;
   --red: #ec2626;
   --green: #00aa44;
   --blue: #088dd8;
+  --gray: #777777;
 
   /* Font Size Variables */
   --xs-small: 8px;
@@ -29,8 +30,9 @@
     --background: #0a0a0a;
     --secondary-background: #171717;
     --white: #ededed;
-    --primary-purple: #7a3773;
-    --secondary-purple: #c48484;
+    --primary-purple: #3c0030;
+    --secondary-purple: #9a3ae3;
+    --gray: #777777;
     --red: #d11b1b;
     --green: #008833;
     --blue: #0668b8;
@@ -63,6 +65,10 @@ body {
   color: var(--blue);
 }
 
+.text-gray {
+  color: var(--gray);
+}
+
 .bg-background {
   background-color: var(--background);
 }
@@ -72,6 +78,10 @@ body {
 }
 
 .bg-secondary {
+  background-color: var(--secondary-background);
+}
+
+.bg-secondary-purple {
   background-color: var(--secondary-purple);
 }
 
@@ -114,4 +124,8 @@ body {
 
 .text-xx-large {
   font-size: var(--xx-large);
+}
+
+.bg-gray {
+  background-color: var(--gray);
 }
