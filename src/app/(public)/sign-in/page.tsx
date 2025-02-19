@@ -17,7 +17,6 @@ export default function SignIn() {
       <div className="w-[60%] bg-background flex items-center justify-center">
         <div className="w-full max-w-md p-8 bg-primary rounded-lg shadow-lg">
           <h2 className="text-xx-large text-white text-center mb-6">Sign In</h2>
-          <a href="/auth/login">Log in</a>
           <Button
             className="bg-secondary-purple text-white rounded w-full"
             redirect="/auth/login"
