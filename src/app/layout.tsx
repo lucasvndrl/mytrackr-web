@@ -1,5 +1,5 @@
+import ToasterClient from "@/components/ToasterClient";
 import "./globals.css";
-import { Auth0Provider } from "@auth0/nextjs-auth0";
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -8,7 +8,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <div className="bg-background min-h-screen w-full flex">{children}</div>
+        {/* <UserProvider> */}
+        <div className="bg-background min-h-screen w-full flex flex-col">
+          {/* <Header /> */}
+          <main className="flex-1">{children}</main>
+          <ToasterClient />
+        </div>
+        {/* </UserProvider> */}
       </body>
     </html>
   );

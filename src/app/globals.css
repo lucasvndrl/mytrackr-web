@@ -129,3 +129,8 @@ body {
 .bg-gray {
   background-color: var(--gray);
 }
+
+html,
+body {
+  overflow-x: hidden;
+}
