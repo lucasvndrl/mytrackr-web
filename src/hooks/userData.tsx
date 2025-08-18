@@ -1,9 +1,7 @@
 "use client";
 
 import { AccountTable } from "@/types/dbTables";
-import { getAccessToken } from "@auth0/nextjs-auth0";
-import { redirect } from "next/navigation";
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useState } from "react";
 import toast from "react-hot-toast";
 
 interface UserContextProps {

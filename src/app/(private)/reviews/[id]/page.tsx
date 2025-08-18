@@ -6,9 +6,10 @@ import Image from "next/image";
 export default async function ReviewDetailPage({
   params,
 }: {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }) {
-  const { review, movie } = await getReviewDetail(params.id);
+  const { id } = await params;
+  const { review, movie } = await getReviewDetail(id);
 
   if (!review) {
     notFound();

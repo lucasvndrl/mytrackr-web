@@ -5,7 +5,7 @@ import { Rating } from "react-simple-star-rating";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { useUserData } from "@/hooks/userData";
-import { getAccessToken, useUser } from "@auth0/nextjs-auth0";
+import { getAccessToken } from "@auth0/nextjs-auth0";
 import { useEffect } from "react";
 
 type ReviewFormProps = {

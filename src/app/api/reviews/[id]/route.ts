@@ -1,8 +1,5 @@
-import { getReviewsFromMovieSchema } from "@/schemas/reviewsSchema";
 import { getReviewDetailController } from "@/useCases/Reviews/GetReviewDetail";
-import { getReviewsFromMovieController } from "@/useCases/Reviews/GetReviewsFromMovie";
 import { ensureAuthenticated } from "@/utils/tokenHandler";
-import { z } from "zod";
 
 export async function GET(
   request: Request,

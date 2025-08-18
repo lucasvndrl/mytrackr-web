@@ -1,6 +1,4 @@
-import { ImageProps } from "next/image";
-
-type Movie = {
+export type Movie = {
   movie_id: string;
   title: string;
   synopsis: string;

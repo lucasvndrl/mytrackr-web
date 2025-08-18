@@ -1,4 +1,3 @@
-import { auth0 } from "@/lib/auth0";
 import { getAccountDetailsController } from "@/useCases/Account/GetAccountDetails";
 import { ensureAuthenticated } from "@/utils/tokenHandler";
 

@@ -1,4 +1,3 @@
-import { auth0 } from "@/lib/auth0";
 import jwt from "jsonwebtoken";
 import jwksClient from "jwks-rsa";
 

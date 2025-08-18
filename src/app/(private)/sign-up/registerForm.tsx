@@ -4,10 +4,9 @@ import React, { useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { accountSchema, createAccountSchema } from "@/schemas/accountSchema";
+import { accountSchema } from "@/schemas/accountSchema";
 import { getAccessToken, useUser } from "@auth0/nextjs-auth0";
 import toast from "react-hot-toast";
-import { CreateAccountDTO } from "@/useCases/Account/CreateAccount/CreateAccountDTO";
 import ReactSelect from "react-select";
 import { useRouter } from "next/navigation";
 
@@ -59,15 +58,14 @@ const RegisterForm: React.FC = () => {
         },
         body: JSON.stringify(payload),
       });
-      console.log(res);
+
       if (!res.ok) throw new Error("Failed to create profile");
       toast.success("Profile successfully created");
       setLoading(false);
       router.push("/credentialscheck");
     } catch (error) {
-      console.log(error);
       setLoading(false);
-      console.error(error);
+
       toast.error("Error creating profile");
     }
   };

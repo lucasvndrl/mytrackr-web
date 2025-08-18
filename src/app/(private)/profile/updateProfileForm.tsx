@@ -45,7 +45,6 @@ export default function UpdateProfileForm({ user }: UpdateProfileFormProps) {
     control,
     reset,
     setValue,
-    getValues,
     formState: { errors, isDirty },
   } = useForm<AccountData>({
     resolver: zodResolver(accountSchema),

@@ -1,5 +1,5 @@
 import { auth0 } from "@/lib/auth0";
-import { AccountTable, MoviesTable } from "@/types/dbTables";
+import { AccountTable } from "@/types/dbTables";
 import { Movie } from "@/types/movie";
 import { Review } from "@/types/review";
 import { transformMoviesWithPoster } from "@/utils/transformMoviesWithPoster";

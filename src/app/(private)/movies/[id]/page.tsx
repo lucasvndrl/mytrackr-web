@@ -1,11 +1,8 @@
 import ReviewList from "@/components/ReviewsList";
-import { Movie } from "@/types/movie";
-import { Review } from "@/types/review";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { getMovieDetailData } from "./getMovieDetailData";
 import Link from "next/link";
-import { Rating } from "react-simple-star-rating";
 import RatingInfo from "@/components/RatingInfo";
 
 export default async function MovieDetailsPage(context: {

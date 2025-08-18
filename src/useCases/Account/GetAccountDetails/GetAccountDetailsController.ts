@@ -1,6 +1,5 @@
-import { JwtPayload } from "jsonwebtoken";
-import { GetAccountDetailsUseCase } from "./GetAccountDetailsUseCase";
 import { verifyToken } from "@/utils/tokenHandler";
+import { GetAccountDetailsUseCase } from "./GetAccountDetailsUseCase";
 
 export class GetAccountDetailsController {
   constructor(private getAccountDetailsUseCase: GetAccountDetailsUseCase) {}
