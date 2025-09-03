@@ -12,6 +12,7 @@ export async function getReviewDetail(
   reviewId: string
 ): Promise<ReviewDetailData> {
   const session = await auth0.getSession();
+  const APP_URL = process.env.APP_BASE_URL;
 
   if (!session?.user) {
     throw new Error("Unauthorized");
@@ -24,13 +25,10 @@ export async function getReviewDetail(
     sub: session.user.sub,
   };
 
-  const reviewRes = await fetch(
-    `http://localhost:3000/api/reviews/${reviewId}`,
-    {
-      headers,
-      cache: "no-store",
-    }
-  );
+  const reviewRes = await fetch(`${APP_URL}/api/reviews/${reviewId}`, {
+    headers,
+    cache: "no-store",
+  });
 
   if (!reviewRes.ok) {
     throw new Error("Erro ao buscar a review");
@@ -38,13 +36,10 @@ export async function getReviewDetail(
 
   const review = await reviewRes.json();
 
-  const movieRes = await fetch(
-    `http://localhost:3000/api/movies/${review.movie_id}`,
-    {
-      headers,
-      cache: "no-store",
-    }
-  );
+  const movieRes = await fetch(`${APP_URL}/api/movies/${review.movie_id}`, {
+    headers,
+    cache: "no-store",
+  });
 
   if (!movieRes.ok) {
     throw new Error("Erro ao buscar o filme da review");

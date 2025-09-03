@@ -10,6 +10,7 @@ export default function CredentialsCheck() {
   const router = useRouter();
   const { setUser } = useUserData();
   const { user, isLoading, error } = useUser();
+  const APP_URL = process.env.APP_BASE_URL;
 
   useEffect(() => {
     if (isLoading) return;
@@ -22,15 +23,12 @@ export default function CredentialsCheck() {
     const validateUser = async () => {
       try {
         const token = await getAccessToken();
-        const response = await fetch(
-          "http://localhost:3000/api/account/details",
-          {
-            method: "GET",
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+        const response = await fetch(`${APP_URL}/api/account/details`, {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
 
         if (!response.ok) {
           router.push("/sign-up");

@@ -1,20 +1,20 @@
 import { Kysely, PostgresDialect } from "kysely";
-import { Pool } from "pg";
+import pg from "pg";
 import { Database } from "./types/dbTables";
 
-// it is possible to run migrations using kysely, doc: https://kysely.dev/docs/migrations
-
-const postgresDialect = new PostgresDialect({
-  pool: new Pool({
-    database: process.env.NODE_ENV === "test" ? "testdb" : "postgres",
-    host: "localhost",
-    user: process.env.NODE_ENV === "test" ? "test" : "postgres",
-    password: process.env.NODE_ENV === "test" ? "test" : "1234",
-    port: 5432,
-    max: 10,
-  }),
+const connectionString =
+  (process.env.DATABASE_URL_MIGRATE
+    ? process.env.DATABASE_URL_MIGRATE
+    : process.env.DATABASE_URL) ??
+  "postgresql://postgres:1234@localhost:5432/postgres";
+console.log(connectionString);
+const pool = new pg.Pool({
+  connectionString,
+  ssl: connectionString.includes("supabase.co")
+    ? { rejectUnauthorized: false }
+    : undefined,
 });
 
 export const db = new Kysely<Database>({
-  dialect: postgresDialect,
+  dialect: new PostgresDialect({ pool }),
 });
