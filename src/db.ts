@@ -11,7 +11,10 @@ console.log(connectionString);
 const pool = new pg.Pool({
   connectionString,
   ssl: connectionString.includes("supabase.co")
-    ? { rejectUnauthorized: false }
+    ? {
+        rejectUnauthorized: false,
+        checkServerIdentity: () => undefined, // Desabilita verificação do servidor
+      }
     : undefined,
 });
 
