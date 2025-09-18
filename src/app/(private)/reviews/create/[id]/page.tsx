@@ -7,7 +7,6 @@ export default async function CreateReviewPage(context: {
 }) {
   const { id } = await context.params;
   const session = await auth0.getSession();
-  const APP_URL = process.env.APP_BASE_URL;
 
   if (!session?.user) {
     throw new Error("Unauthorized");
@@ -15,7 +14,7 @@ export default async function CreateReviewPage(context: {
 
   const { token } = await auth0.getAccessToken();
 
-  const res = await fetch(`${APP_URL}/api/movies/${id}`, {
+  const res = await fetch(`/api/movies/${id}`, {
     headers: {
       Authorization: `Bearer ${token}`,
       sub: session.user.sub,

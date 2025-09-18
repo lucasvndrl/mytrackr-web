@@ -12,7 +12,6 @@ export interface DashboardData {
 
 export async function getDashboardData(): Promise<DashboardData> {
   const session = await auth0.getSession();
-  const APP_URL = process.env.APP_BASE_URL;
 
   if (!session?.user) {
     throw new Error("Unauthorized");
@@ -26,15 +25,15 @@ export async function getDashboardData(): Promise<DashboardData> {
   };
 
   const [userRes, moviesRes, reviewsRes] = await Promise.all([
-    fetch(`${APP_URL}/api/account/details`, {
+    fetch(`/api/account/details`, {
       headers,
       cache: "no-store",
     }),
-    fetch(`${APP_URL}/api/movies/fetch`, {
+    fetch(`/api/movies/fetch`, {
       headers,
       cache: "no-store",
     }),
-    fetch(`${APP_URL}/api/reviews/fetch`, {
+    fetch(`/api/reviews/fetch`, {
       headers,
       cache: "no-store",
     }),

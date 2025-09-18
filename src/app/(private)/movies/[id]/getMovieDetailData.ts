@@ -12,7 +12,6 @@ export async function getMovieDetailData(
   movieId: string
 ): Promise<MovieDetailData> {
   const session = await auth0.getSession();
-  const APP_URL = process.env.APP_BASE_URL;
 
   if (!session?.user) {
     throw new Error("Unauthorized");
@@ -26,11 +25,11 @@ export async function getMovieDetailData(
   };
 
   const [movieRes, reviewsRes] = await Promise.all([
-    fetch(`${APP_URL}/api/movies/${movieId}`, {
+    fetch(`/api/movies/${movieId}`, {
       headers,
       cache: "no-store",
     }),
-    fetch(`${APP_URL}/api/reviews/movie/${movieId}`, {
+    fetch(`/api/reviews/movie/${movieId}`, {
       headers,
       cache: "no-store",
     }),
