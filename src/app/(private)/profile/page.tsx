@@ -7,8 +7,9 @@ export default async function ProfilePage() {
   const session = await auth0.getSession();
   const user = session?.user;
   if (!user) redirect("/sign-in");
+  const APP_URL = process.env.APP_BASE_URL;
 
-  const userResponse = await fetch(`/api/account/details`, {
+  const userResponse = await fetch(`${APP_URL}/api/account/details`, {
     headers: {
       Authorization: `Bearer ${session.tokenSet.accessToken}`,
       sub: session.user.sub,
