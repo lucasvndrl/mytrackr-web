@@ -31,7 +31,7 @@ export class GetAllReviewsController {
           review.reviewer
         );
       }
-      const avatarBuffer = reviewerAccount?.avatar as Buffer;
+      const avatarBuffer = reviewerAccount?.avatar as unknown as Buffer;
       const avatarBase64 = avatarBuffer.toString("base64");
       return {
         review_id: review.review_id,
