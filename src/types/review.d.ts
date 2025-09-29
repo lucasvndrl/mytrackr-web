@@ -7,6 +7,6 @@ export type Review = {
   movie_poster: ImageSourcePropType;
   movie_title: string;
   reviewer_name: string;
-  reviewer_avatar: string;
+  reviewer_avatar: ArrayBuffer;
   review_date?: string;
 };
