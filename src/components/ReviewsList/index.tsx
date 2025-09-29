@@ -15,14 +15,16 @@ export default function ReviewList({ reviews }: { reviews: Review[] }) {
       <h2 className="text-2xl font-semibold mb-4">Reviews</h2>
       <div className="space-y-4">
         {reviews.map((review) => {
+          console.log(review.reviewer_avatar);
           const uint8Array = new Uint8Array(review.reviewer_avatar);
-
+          console.log(uint8Array, "ARRAY");
           const base64String = btoa(
             uint8Array.reduce(
               (acc, byte) => acc + String.fromCharCode(byte),
               ""
             )
           );
+          console.log(base64String, "BASE64");
           return (
             <div
               key={review.review_id}
