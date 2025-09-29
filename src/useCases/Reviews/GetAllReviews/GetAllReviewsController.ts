@@ -31,6 +31,7 @@ export class GetAllReviewsController {
           review.reviewer
         );
       }
+      console.log(reviewerAccount?.avatar, "REVIEWER ACCOUNT AVATAR");
       const avatarBuffer = reviewerAccount?.avatar as unknown as Buffer;
       console.log(avatarBuffer, "BUFFER");
       const avatarBase64 = avatarBuffer.toString("base64");
