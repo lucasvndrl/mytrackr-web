@@ -31,7 +31,6 @@ export class GetAllReviewsController {
           review.reviewer
         );
       }
-      console.log(reviewerAccount, "reviewerAccount");
       return {
         review_id: review.review_id,
         movie_id: review.movie_id,
