@@ -10,7 +10,7 @@ export interface AccountTable {
   email: string;
   created_at: Date;
   last_login: Date;
-  avatar?: Blob;
+  avatar?: ArrayBuffer;
   favorite_genres: string[];
 }
 

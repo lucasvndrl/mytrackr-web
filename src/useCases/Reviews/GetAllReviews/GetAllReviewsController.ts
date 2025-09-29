@@ -31,6 +31,8 @@ export class GetAllReviewsController {
           review.reviewer
         );
       }
+      const avatarBuffer = reviewerAccount?.avatar as Buffer;
+      const avatarBase64 = avatarBuffer.toString("base64");
       return {
         review_id: review.review_id,
         movie_id: review.movie_id,
@@ -40,7 +42,7 @@ export class GetAllReviewsController {
         movie_title: movie.title,
         review_date: review.review_created,
         reviewer_name: reviewerAccount?.username ?? "",
-        reviewer_avatar: reviewerAccount?.avatar ?? "",
+        reviewer_avatar: avatarBase64 ?? "",
       } as GetAllReviewsDTO;
     });
 
