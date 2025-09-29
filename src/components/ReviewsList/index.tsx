@@ -15,9 +15,6 @@ export default function ReviewList({ reviews }: { reviews: Review[] }) {
       <h2 className="text-2xl font-semibold mb-4">Reviews</h2>
       <div className="space-y-4">
         {reviews.map((review) => {
-          const base64 = btoa(
-            String.fromCharCode(...new Uint8Array(review.reviewer_avatar.data))
-          );
           return (
             <div
               key={review.review_id}
@@ -28,7 +25,7 @@ export default function ReviewList({ reviews }: { reviews: Review[] }) {
                 <Image
                   src={
                     review.reviewer_avatar
-                      ? `data:image/png;base64,${base64}`
+                      ? `data:image/png;base64,${review.reviewer_avatar}`
                       : "/default-avatar.webp"
                   }
                   alt="Reviewer avatar"

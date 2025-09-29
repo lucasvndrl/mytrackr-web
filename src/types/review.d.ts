@@ -7,7 +7,7 @@ export type Review = {
   movie_poster: ImageSourcePropType;
   movie_title: string;
   reviewer_name: string;
-  reviewer_avatar: SupabaseBuffer;
+  reviewer_avatar: string;
   review_date?: string;
 };
 

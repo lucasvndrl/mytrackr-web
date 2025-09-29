@@ -31,6 +31,23 @@ export class GetAllReviewsController {
           review.reviewer
         );
       }
+
+      let avatarBase64: string | null = null;
+      if (reviewerAccount?.avatar) {
+        if (reviewerAccount.avatar instanceof Buffer) {
+          avatarBase64 = reviewerAccount.avatar.toString("base64");
+        } else if (reviewerAccount.avatar instanceof Blob) {
+          const arrayBuffer = await reviewerAccount.avatar.arrayBuffer();
+          avatarBase64 = Buffer.from(arrayBuffer).toString("base64");
+        } else {
+          const serialized = reviewerAccount.avatar as {
+            type: "Buffer";
+            data: number[];
+          };
+          avatarBase64 = Buffer.from(serialized.data).toString("base64");
+        }
+      }
+
       return {
         review_id: review.review_id,
         movie_id: review.movie_id,
@@ -40,7 +57,7 @@ export class GetAllReviewsController {
         movie_title: movie.title,
         review_date: review.review_created,
         reviewer_name: reviewerAccount?.username ?? "",
-        reviewer_avatar: reviewerAccount?.avatar ?? "",
+        reviewer_avatar: avatarBase64 ?? "",
       } as GetAllReviewsDTO;
     });
 
