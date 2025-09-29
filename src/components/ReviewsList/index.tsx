@@ -9,7 +9,7 @@ import ReviewModalContent from "../Modals/ReviewModalContent";
 export default function ReviewList({ reviews }: { reviews: Review[] }) {
   const [openModal, setOpenModal] = useState(false);
   const [selectedReview, setSelectedReview] = useState<Review | null>(null);
-
+  console.log(reviews);
   return (
     <section className="mt-8">
       <h2 className="text-2xl font-semibold mb-4">Reviews</h2>
