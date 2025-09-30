@@ -57,7 +57,7 @@ export class GetAllReviewsController {
         movie_title: movie.title,
         review_date: review.review_created,
         reviewer_name: reviewerAccount?.username ?? "",
-        reviewer_avatar: avatarBase64 ?? "",
+        reviewer_avatar: `data:image/jpeg;base64,${avatarBase64}` ?? "",
       } as GetAllReviewsDTO;
     });
 

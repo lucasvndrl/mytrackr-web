@@ -22,12 +22,8 @@ export default function ReviewList({ reviews }: { reviews: Review[] }) {
             >
               {/* Avatar */}
               <div className="w-12 h-12 relative rounded-full overflow-hidden flex-shrink-0">
-                <img
-                  src={
-                    review.reviewer_avatar
-                      ? `data:image/jpeg;base64,${review.reviewer_avatar}`
-                      : "/default-avatar.webp"
-                  }
+                <Image
+                  src={review.reviewer_avatar ?? "/default-avatar.webp"}
                   alt="Reviewer avatar"
                   className="object-cover"
                 />
