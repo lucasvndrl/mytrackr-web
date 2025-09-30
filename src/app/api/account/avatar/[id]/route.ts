@@ -9,7 +9,7 @@ export async function GET(
     .select("avatar")
     .where("user_id", "=", params.id)
     .executeTakeFirst();
-
+  console.log(data);
   if (!data?.avatar) {
     return new Response("Not found", { status: 404 });
   }
