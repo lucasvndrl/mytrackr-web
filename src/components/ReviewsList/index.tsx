@@ -26,6 +26,8 @@ export default function ReviewList({ reviews }: { reviews: Review[] }) {
                   src={`/api/avatar/${review.reviewer}`}
                   alt="Reviewer avatar"
                   className="object-cover"
+                  fill
+                  unoptimized
                 />
               </div>
 
