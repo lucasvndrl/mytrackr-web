@@ -25,7 +25,7 @@ export default function ReviewList({ reviews }: { reviews: Review[] }) {
                 <img
                   src={
                     review.reviewer_avatar
-                      ? `data:image/png;base64,${review.reviewer_avatar}`
+                      ? `data:image/jpeg;base64,${review.reviewer_avatar}`
                       : "/default-avatar.webp"
                   }
                   alt="Reviewer avatar"
