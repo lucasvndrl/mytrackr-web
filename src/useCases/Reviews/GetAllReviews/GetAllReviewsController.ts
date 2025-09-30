@@ -47,7 +47,12 @@ export class GetAllReviewsController {
           avatarBase64 = Buffer.from(serialized.data).toString("base64");
         }
       }
-
+      console.log("Avatar base64 length:", avatarBase64?.length);
+      console.log("Avatar base64 sample:", avatarBase64?.substring(0, 50));
+      console.log(
+        "Final reviewer_avatar:",
+        `data:image/jpeg;base64,${avatarBase64}`.substring(0, 100)
+      );
       return {
         review_id: review.review_id,
         movie_id: review.movie_id,
