@@ -22,12 +22,15 @@ export default function ReviewList({ reviews }: { reviews: Review[] }) {
             >
               {/* Avatar */}
               <div className="w-12 h-12 relative rounded-full overflow-hidden flex-shrink-0">
-                <Image
-                  src={review.reviewer_avatar || "/default-avatar.png"}
+                <img
+                  src={review.reviewer_avatar}
                   alt="Reviewer avatar"
-                  className="object-cover"
-                  fill
-                  unoptimized
+                  className="w-10 h-10 object-cover rounded-full"
+                  onError={(e) => {
+                    console.error("Image failed to load");
+                    e.currentTarget.src = "/default-avatar.png";
+                  }}
+                  onLoad={() => console.log("Image loaded successfully")}
                 />
               </div>
 
