@@ -23,7 +23,7 @@ export default function ReviewList({ reviews }: { reviews: Review[] }) {
               {/* Avatar */}
               <div className="w-12 h-12 relative rounded-full overflow-hidden flex-shrink-0">
                 <Image
-                  src={`/api/avatar/${review.reviewer}`}
+                  src={review.reviewer_avatar || "/default-avatar.png"}
                   alt="Reviewer avatar"
                   className="object-cover"
                   fill
