@@ -75,9 +75,10 @@ export default function UpdateProfileForm({ user }: UpdateProfileFormProps) {
 
       // Se tem um novo arquivo de avatar, fazer upload primeiro
       if (avatarFile) {
+        const userId = user?.user_id.replace(/[^a-zA-Z0-9-_]/g, "-");
         const formData = new FormData();
         formData.append("avatar", avatarFile);
-        formData.append("userId", user?.user_id || "");
+        formData.append("userId", userId);
 
         const uploadRes = await fetch("/api/account/upload-avatar", {
           method: "POST",
