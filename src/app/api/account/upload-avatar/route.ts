@@ -14,6 +14,8 @@ export async function POST(request: Request) {
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
   );
   console.log(formData);
+  console.log(process.env.NEXT_PUBLIC_SUPABASE_URL);
+  console.log(process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY);
   // Converter file para buffer
   const arrayBuffer = await file.arrayBuffer();
   const buffer = Buffer.from(arrayBuffer);
