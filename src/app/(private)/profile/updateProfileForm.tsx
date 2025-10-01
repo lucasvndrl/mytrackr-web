@@ -35,6 +35,7 @@ type UpdateProfileFormProps = {
 export default function UpdateProfileForm({ user }: UpdateProfileFormProps) {
   const { updateUserData } = useUserData();
   const [avatarPreview, setAvatarPreview] = useState<string | null>(null);
+  const [avatarFile, setAvatarFile] = useState<File | null>(null);
   const [loading, setLoading] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const router = useRouter();
@@ -55,25 +56,55 @@ export default function UpdateProfileForm({ user }: UpdateProfileFormProps) {
       reset({
         username: user.username ?? "",
         favorite_genres: user.favorite_genres ?? [],
-        avatar: (user.avatar as unknown as string) ?? undefined,
+        avatar: user.avatar ?? undefined,
       });
 
-      if (user.avatar) {
-        setAvatarPreview(`data:image/png;base64,${user.avatar}`);
+      // Se o avatar for uma URL do Supabase Storage
+      if (user.avatar && typeof user.avatar === "string") {
+        setAvatarPreview(user.avatar);
       }
     }
-  }, [user]);
+  }, [user, reset]);
 
   const onSubmit = async (data: AccountData) => {
     try {
       setLoading(true);
+      const token = await getAccessToken();
+
+      let avatarUrl = data.avatar;
+
+      // Se tem um novo arquivo de avatar, fazer upload primeiro
+      if (avatarFile) {
+        const formData = new FormData();
+        formData.append("avatar", avatarFile);
+        formData.append("userId", user?.user_id || "");
+
+        const uploadRes = await fetch("/api/account/upload-avatar", {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          body: formData,
+        });
+
+        if (!uploadRes.ok) {
+          throw new Error("Erro ao fazer upload do avatar");
+        }
+
+        const uploadData = await uploadRes.json();
+        avatarUrl = uploadData.url;
+      }
+
+      // Atualizar o perfil com a URL do avatar
       const payload = {
         account: {
-          ...data,
+          username: data.username,
+          favorite_genres: data.favorite_genres,
+          avatar: avatarUrl,
           user_id: user?.user_id,
         },
       } as unknown as UpdateAccountDTO;
-      const token = await getAccessToken();
+
       const res = await fetch("/api/account/update", {
         method: "PATCH",
         headers: {
@@ -84,8 +115,10 @@ export default function UpdateProfileForm({ user }: UpdateProfileFormProps) {
       });
 
       if (!res.ok) throw new Error("Erro ao atualizar perfil");
+
       await updateUserData(token);
       toast.success("User updated successfully");
+      setAvatarFile(null); // Limpar o arquivo após sucesso
       setLoading(false);
     } catch (error) {
       setLoading(false);
@@ -97,14 +130,26 @@ export default function UpdateProfileForm({ user }: UpdateProfileFormProps) {
   const handleAvatarChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
+      // Validar tamanho (máximo 5MB)
+      if (file.size > 5 * 1024 * 1024) {
+        toast.error("Avatar deve ter no máximo 5MB");
+        return;
+      }
+
+      // Validar tipo
+      if (!file.type.startsWith("image/")) {
+        toast.error("Apenas imagens são permitidas");
+        return;
+      }
+
+      // Guardar o arquivo para upload posterior
+      setAvatarFile(file);
+
+      // Criar preview local
       const reader = new FileReader();
       reader.onloadend = () => {
-        const base64WithPrefix = reader.result as string;
-
-        const base64Only = base64WithPrefix.split(",")[1];
-
-        setAvatarPreview(base64WithPrefix);
-        setValue("avatar", base64Only, { shouldDirty: true });
+        setAvatarPreview(reader.result as string);
+        setValue("avatar", "pending-upload", { shouldDirty: true });
       };
       reader.readAsDataURL(file);
     }
