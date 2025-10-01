@@ -13,7 +13,7 @@ export async function POST(request: Request) {
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
   );
-
+  console.log(formData);
   // Converter file para buffer
   const arrayBuffer = await file.arrayBuffer();
   const buffer = Buffer.from(arrayBuffer);
@@ -30,6 +30,7 @@ export async function POST(request: Request) {
     });
 
   if (error) {
+    console.log(error);
     return Response.json({ error: error.message }, { status: 500 });
   }
 
